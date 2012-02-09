@@ -32,10 +32,10 @@ class formacion_partner(osv.osv):
         
          # Relaciones
         #'alumnos_ids': fields.many2many('res.partner', 'formacion_alen_rel', 'id_entidad', 'id_alumno', 'Relación de alumnos', domain=[('is_alumno','=',True)]), #Será visible en entidades
-        'entidades_al_ids' : fields.many2many('res.partner', 'formacion_alen_rel', 'id_alumno', 'id_entidad', 'Relación de alumnos con entidades' ,domain=[('is_entidad','=',True)]), #será visible en alumnos
+        #'entidades_al_ids' : fields.many2many('res.partner', 'formacion_alen_rel', 'id_alumno', 'id_entidad', 'Relación de alumnos con entidades' ,domain=[('is_entidad','=',True)]), #será visible en alumnos
         'entidades_do_ids' : fields.many2many('res.partner', 'formacion_doen_rel', 'id_docente', 'id_entidad', 'Relación de docentes con entidades' ,domain=[('is_entidad','=',True)]), #será visible en docentes
         'cursos_al_ids' : fields.many2many('formacion.cursos', 'formacion_alcu_rel', 'id_alumno', 'id_curso', 'Relación de alumnos con cursos'), #será visible en alumnos
-        'cursos_en_ids' : fields.one2many('formacion.cursos', 'centro_id', 'Relación de cursos',),
+        'cursos_en_ids' : fields.one2many('formacion.cursos', 'centro_id', 'Relación de cursos'),
         #'cursos_en_ids' : fields.many2many('formacion.cursos', 'formacion_encu_rel', 'id_entidad', 'id_curso', 'Relación de cursos'), #será visible en entidades
         'cursos_do_ids' : fields.many2many('formacion.cursos', 'formacion_docu_rel', 'id_docente', 'id_curso', 'Relación de cursos'), #será visible en docentes
 

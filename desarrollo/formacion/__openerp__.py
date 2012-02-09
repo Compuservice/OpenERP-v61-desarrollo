@@ -22,7 +22,7 @@
 ##############################################################################
 
 {
-    "name": "formacion",
+    "name": "Formacion",
     "version": "0.1",
     "category" : "Generic Modules/Formación",
     'depends': ['base', 'document', 'l10n_es_toponyms', 'l10n_es_toponyms_region', 'account_payment_extension'],
@@ -31,9 +31,8 @@
     "description":
     """
         Módulo para la gestión de un centro de formación, que incorpora las siguientes características:
-            * bla bla
-            * bla bla bla 
-            * y bla
+            * Extiende la clase res.partner añadiendo los campos necesarios para gestionar entidades, cursos, docentes y alumnos.
+            * Crea el objeto cursos
         
     """,
     "init_xml": [],

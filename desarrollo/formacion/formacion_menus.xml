@@ -11,10 +11,10 @@
 
 	<menuitem id="submenu_cursos" name="Cursos"  parent="aplicacion_formacion" sequence="1"/>
 
-	<menuitem id="menu_cursos" name="Cursos"  parent="submenu_cursos" action="action_formacion_cursos" sequence="1"/>
-	<menuitem id="menu_entidades" name="Entidades" action="accion_formulario_entidades" icon="terp-personal" parent="submenu_cursos" />
-	<menuitem id="menu_docentes" name="Docentes" action="accion_formulario_docentes" icon="terp-partner" parent="submenu_cursos" />
-	<menuitem id="menu_alumnos" name="Alumnos" action="accion_formulario_alumnos" icon="terp-partner" parent="submenu_cursos" />
+	<menuitem id="menu_entidades" name="Entidades" action="accion_formulario_entidades" parent="submenu_cursos" sequence="1" />
+	<menuitem id="menu_cursos" name="Cursos"  action="action_formacion_cursos" parent="submenu_cursos"  sequence="2" />
+	<menuitem id="menu_docentes" name="Docentes" action="accion_formulario_docentes" parent="submenu_cursos" sequence="3" />
+	<menuitem id="menu_alumnos" name="Alumnos" action="accion_formulario_alumnos" parent="submenu_cursos" sequence="4" />
 
 	<menuitem id="submenu_configuracion" name="Configuración"  parent="aplicacion_formacion" sequence="5"/>
 	

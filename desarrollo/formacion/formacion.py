@@ -61,12 +61,12 @@ class formacion_cursos(osv.osv):
                 'log_fecha_cancelado': fields.datetime('Fecha Cancelación'),
                 'fecha_fin': fields.datetime('Fecha Finalización'),              
                 #Relaciones
-                'centro_id':fields.many2one('res.partner','Entidad Impartidora', domain=[('is_entidad','=',True)]),
+                'centro_id':fields.many2one('res.partner','Entidad Impartidora', required=True, domain=[('is_entidad','=',True)]),
                 'direccion_id': fields.many2one('res.partner.address','Dirección'),
                 'company_id': fields.many2one('res.company', 'Company', select=1),
                 'alumnos_ids': fields.many2many('res.partner', 'formacion_alcu_rel', 'id_curso', 'id_alumno', 'Relación de alumnos', domain=[('is_alumno','=',True)]), 
                 'docentes_ids': fields.many2many('res.partner', 'formacion_docu_rel', 'id_curso', 'id_docente', 'Relación de docentes', domain=[('is_docente','=',True)]),
-                'entidades_ids': fields.many2many('res.partner', 'formacion_encu_rel', 'id_curso', 'id_entidad', 'Relación de entidades', domain=[('is_entidad','=',True)]),
+                #'entidades_ids': fields.many2many('res.partner', 'formacion_encu_rel', 'id_curso', 'id_entidad', 'Relación de entidades', domain=[('is_entidad','=',True)]),
                 #'docente_id':fields.many2one('res.partner', 'Docente'),
                 'tags' : fields.text('Tags'),                
                 'notas': fields.text('Observaciones'),
@@ -86,6 +86,7 @@ class formacion_cursos(osv.osv):
                 
                 }
     _defaults = {
+        'centro_id': lambda self, cr, uid, context: context.get('centro_id', False),
         'company_id': lambda self,cr,uid,c: self.pool.get('res.company')._company_default_get(cr, uid, 'formacion.configuracion.cursos.nomnres', context=c),
         'modalidad': lambda *a: '1',
                  }

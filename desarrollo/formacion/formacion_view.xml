@@ -16,9 +16,6 @@
          		<field name="horas" select="1" />
          		<field name="fecha_inicio" select="1" />
          		<field name="fecha_fin" select="1" />
-<!--
-         		<field name="docente_id" select="1" />
--->
          		<field name="centro_id" select="1" />
          		<field name="direccion_id" select="1" />
 			</tree>
