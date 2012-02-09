@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data>
+
+
+	<!--  Lista Cursos -->
+	<record model="ir.ui.view" id="formacion_cursos_view_tree">
+		<field name="name">formacion.cursos.view.tree</field>
+		<field name="model">formacion.cursos</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Listado de cursos">
+         		<field name="name" select="1" />
+         		<field name="modalidad" select="1" />
+         		<field name="horas" select="1" />
+         		<field name="fecha_inicio" select="1" />
+         		<field name="fecha_fin" select="1" />
+<!--
+         		<field name="docente_id" select="1" />
+-->
+         		<field name="centro_id" select="1" />
+         		<field name="direccion_id" select="1" />
+			</tree>
+		</field>
+	</record>
+
+	<!-- Formulario cursos -->
+	<record model="ir.ui.view" id="formacion_cursos_view_form">
+   		<field name="name">formacion.cursos.view.form</field>
+		<field name="model">formacion.cursos</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Cursos">
+				<field name="name"  />
+				<field name="modalidad" />
+				<notebook colspan="4">
+					<page string='General'>
+						<group colspan="4" col="6">
+						 	<group colspan="1" col="2">
+						 		<separator string='Número de horas' colspan="2"/>
+				         		<field name="horas" string='Totales'/>
+				         		<field name="horas_presenciales" string='Presenciales' attrs="{'invisible': [('modalidad','in','1')]}"/>
+				         		<field name="horas_teleformacion" string='Online' attrs="{'invisible': [('modalidad','in','2')]}"/>
+			         		</group>
+			         		<group colspan="1" col="2" >
+				         	    <separator string='Fechas' colspan="2"/>
+				         		<field name="fecha_inicio" string='Inicio' />
+				         		<field name="fecha_fin"  string='Finalización'/>
+			         		</group>
+		         		</group>
+						<group colspan="1" col="2">
+			         		<separator string='Entidad Impartidora' colspan="2"/>	         		
+			         		<field name="centro_id"
+                                context="{'is_entidad':1,'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_entidades','search_view_ref' : 'formacion.vista_filtro_entidades'}"/>
+			         		<field name="direccion_id" context="{'partner_id':centro_id}" domain="[('partner_id','=',centro_id)]"/>
+	         			</group>	
+	         			<group colspan="4" col="6">	         				         				         			
+	         				<field name="state" colspan="2"/>
+							<button name="formacion_cursos_open" string="Abierto" states="draft" icon="gtk-go-forward"/>
+			             	<button name="formacion_cursos_close" string="Cerrado" states="cerrando" icon="gtk-jump-to"/>
+							<button name="formacion_cursos_cerrando" string="Cerrando" states="impartiendo" icon="gtk-jump-to"/>
+				            <button name="formacion_cursos_impartiendo" string="Impartiendo" states="open"  icon="gtk-go-forward"/>
+	         			</group>
+		         		         						
+		         		         			
+	         		</page>
+	         		<page string="Relación de docentes">
+             				<field name="docentes_ids" nolabel="1"
+                                context="{'is_docente':1,'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_docentes','search_view_ref' : 'formacion.vista_filtro_docentes'}"/>
+         			</page>
+             		<page string="Relación de alumnos">
+							<field name="alumnos_ids" nolabel="1"
+                                context="{'is_alumno':1, 'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_alumnos','search_view_ref' : 'formacion.vista_filtro_alumnos'}"/>
+					</page> 
+
+					<page string="Tags">
+                            <field colspan="4" name="tags" nolabel="1"/>
+                        </page>  
+					<page string="Observaciones">
+						<field name="notas" colspan="4" nolabel="1"/>
+					</page>
+					<page string="Logs">
+						<field name="log_fecha_creacion" readonly="1"/>
+						<field name="log_fecha_abierto" readonly="1"/>
+						<field name="log_fecha_impartiendo" readonly="1"/>
+						<field name="log_fecha_cerrando" readonly="1"/>
+						<field name="log_fecha_cerrado" readonly="1"/>
+						<field name="log_fecha_cancelado" readonly="1"/>
+					</page>
+         		</notebook>
+			</form>
+		</field>
+	</record>
+
+
+	<!--  Listado editable configuración de cursos  -->
+	<record model="ir.ui.view" id="formacion_configuracion_cursos_view_tree">
+		<field name="name">formacion.configuracion.cursos.view.tree</field>
+		<field name="model">formacion.configuracion.cursos.nombres</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Listado de cursos" editable="top">
+         		<field name="name" />
+			</tree>
+		</field>
+	</record>
+
+
+<!-- ###############  			DECLARACIÓN DE ACCIONES         ############################ -->
+	<record model="ir.actions.act_window" id="action_formacion_cursos">
+		<field name="name">Listado de cursos</field>
+		<field name="res_model">formacion.cursos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_id" ref= "formacion_cursos_view_tree" />
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	<record model="ir.actions.act_window" id="action_formacion_configuracion_cursos">
+		<field name="name">Configure Curso</field>
+		<field name="res_model">formacion.configuracion.cursos.nombres</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_id" ref= "formacion_configuracion_cursos_view_tree" />
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	</data>
+</openerp>
+
+
+
+
+
+
+
+

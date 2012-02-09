@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+	<!--**********************************************************************************************************************************
+		Vistas 
+	***********************************************************************************************************************************-->
+	<!-- Arbol de entidades -->
+        <record id="vista_arbol_entidades" model="ir.ui.view">
+            <field name="name">formacion.entidades.tree</field>
+            <field name="model">res.partner</field>
+            <field name="type">tree</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="entidades">
+                    <field name="name" width="250"/>
+                    <field name="phone"/>
+					<field name="movil"/>
+                    <field name="email" width="250" />
+                    <field name="city" width="250" />
+					<field name="cpostal" />
+                </tree>
+            </field>
+        </record>
+	<!-- Arbol de docentes -->	
+        <record id="vista_arbol_docentes" model="ir.ui.view">
+            <field name="name">formacion.docentes.tree</field>
+            <field name="model">res.partner</field>
+            <field name="type">tree</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="docentes">
+                    <field name="name" width="250"/>
+                    <field name="phone"/>
+					<field name="movil"/>
+                    <field name="email" width="250" />
+                    <field name="city" width="250" />
+					<field name="cpostal" />
+                </tree>
+            </field>
+        </record>
+
+    <!-- Arbol de alumnos -->
+        <record id="vista_arbol_alumnos" model="ir.ui.view">
+            <field name="name">formacion.alumnos.tree</field>
+            <field name="model">res.partner</field>
+            <field name="type">tree</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="alumnos">
+                    <field name="name" width="250"/>
+                    <field name="phone"/>
+					<field name="movil"/>
+                    <field name="email" width="250" />
+                    <field name="city" width="250" />
+					<field name="cpostal" />
+                </tree>
+            </field>
+        </record>
+
+	<!-- Búsqueda de entidades -->
+		<record id="vista_filtro_entidades" model="ir.ui.view">
+			<field name="name">formacion.entidades.select</field>
+            <field name="model">res.partner</field>
+            <field name="type">search</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+	            <search string="Buscar entidad">
+                   <group col='10' colspan='4'>
+                        <field name="name" select="1"/>
+                        <field name="phone" select="1" width="40"/>
+                        <field name="movil" select="1" width="40"/>
+                        <separator orientation="vertical"/>
+                        <field name="city" select="1"/>
+						<field name="cpostal" select="1" width="10" />
+                   </group>
+	            </search>
+            </field>
+        </record>
+
+	<!-- Búsqueda de docentes -->
+		<record id="vista_filtro_docentes" model="ir.ui.view">
+			<field name="name">formacion.docentes.select</field>
+            <field name="model">res.partner</field>
+            <field name="type">search</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+	            <search string="Buscar docente">
+                   <group col='10' colspan='4'>
+                        <field name="name" select="1"/>
+                        <field name="phone" select="1" width="40"/>
+                        <field name="movil" select="1" width="40"/>
+                        <separator orientation="vertical"/>
+                        <field name="city" select="1"/>
+						<field name="cpostal" select="1" width="10" />
+                   </group>
+	            </search>
+            </field>
+        </record>
+
+	<!-- Búsqueda de alumnos -->
+		<record id="vista_filtro_alumnos" model="ir.ui.view">
+			<field name="name">formacion.alumnos.select</field>
+            <field name="model">res.partner</field>
+            <field name="type">search</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+	            <search string="Buscar alumno">
+                   <group col='10' colspan='4'>
+                        <filter string="Fecha de inscripción" icon="terp-personal+" domain="[('fecha_inscripcion','=',1)]"/>
+                        <filter string="Fecha de matriculación" icon="terp-personal+" domain="[('fecha_matricula','=',1)]"/>
+                        <separator orientation="vertical"/>
+                        <field name="name" select="1" />
+                        <field name="phone" select="1" width="40"/>
+                        <field name="movil" select="1" width="40"/>
+                        <separator orientation="vertical"/>
+                        <field name="city" select="1"/>
+						<field name="cpostal" select="1" width="10" />
+                   </group>
+	            </search>
+            </field>
+        </record>
+
+	<!-- Formulario de entidades y alumnos -->
+        <record id="vista_formulario_gral" model="ir.ui.view">
+            <field name="name">formacion.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field eval="17" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Formación" col='1'>
+                    <group col="8" colspan="4">
+  						<field name="is_entidad" invisible="1" />
+  						<field name="is_docente" invisible="1" />
+  						<field name="is_alumno" invisible="1" />
+                        <group colspan="6" col="8" >
+                            <group colspan="8" attrs="{'invisible':[('is_entidad','=',1)]}" col="4" >
+                                <field name="nombre" on_change="onchange_nomyapel(nombre,apellidos)" attrs="{'required':[('is_entidad','=',0)]}" colspan="4"/>
+                                <field name="apellidos" on_change="onchange_nomyapel(nombre,apellidos)" attrs="{'required':[('is_entidad','=',0)]}" colspan="4"/>
+	    						<field name="dni" on_change="onchange_checkdni(dni)" attrs="{'invisible':[('is_entidad','=',1)]}" />
+	    						<field name="lang" />
+                            </group>
+                            <newline />
+                            <group colspan="8" col="6" attrs="{'invisible':[('is_entidad','=',0)]}" >
+                                <field name="name" colspan="4" />
+    							<field name="vat" />
+                            </group>
+                        </group>
+                        <group colspan="1" col="2" >
+                            <field name="fecha_nacimiento" attrs="{'invisible':[('is_alumno','!=',1)]}"/>
+                            <field name="fecha_inscripcion" attrs="{'invisible':[('is_alumno','!=',1)]}"/>
+<!--
+                            <field name="fecha_matricula" attrs="{'invisible':[('is_alumno','!=',1)]}"/>
+-->
+                            <field name="situacion_laboral" attrs="{'invisible':[('is_alumno','!=',1)]}"/>
+                            <field name="factura_al" attrs="{'invisible':[('is_alumno','!=',1)]}"/>
+                        </group>
+                        <group colspan="1" col="2" attrs="{'invisible':[('is_entidad','=',1)]}">
+                            <field name="foto" widget="image" img_width='100' img_height='125' nolabel="1" />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="General" >
+                        <group colspan="8" attrs="{'invisible':[('is_docente','=',1)]}" col="4" >
+                            <field name="forma_pago" />
+                            <field name="comprobante_pago" />
+                            <field name="ftfe" attrs="{'invisible':[('is_entidad','!=',1)]}" />
+                        </group>
+                            <field colspan="4" mode="form,tree" name="address" nolabel="1" select="1" height="260">
+                                <form string="Contactos">
+                                    <group colspan="4" col="8">
+                                        <field name="name" colspan="4" />
+                                        <field name="function" string="Relación" />
+                                    </group>
+                                    <newline/>
+                                      <group colspan="2" col="4">
+                                        <separator string="Postal Address" colspan="4" col="4" />
+                                        <field name="type" string="Type" colspan="2"/>
+                                        <field name="street" colspan="4" />
+                                        <field name="street2" colspan="4" string="Extra" />
+                                        <field name="zip"/>
+                                        <field name="city"/>
+                                        <field name="country_id" completion="1"/>
+                                        <field name="state_id"/>
+                                        <field name="region"/>
+                                     </group>
+                                     <group colspan="2" col="2">
+                                        <separator string="Communication" colspan="2" col="2" />
+                                        <field name="phone"/>
+                                        <field name="mobile"/>
+                                        <field name="fax"/>
+                                        <field name="email" widget="email"/>
+                                     </group>
+                                </form>
+                                <tree string="Contactos">
+                                    <field name="name"/>				    
+                                    <field name="zip"/>
+                                    <field name="city"/>
+                                    <field name="country_id"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
+						<page string="Datos del docente" attrs="{'invisible':[('is_docente','=',False)]}" >
+							<group colspan="4" col="8">
+								<field name="especialidades" colspan="4" />
+								<field name="formacion" colspan="4" />
+                                <newline />
+								<field name="exp_laboral" colspan="4" />
+								<field name="exp_docente" colspan="4" />
+                                <newline />
+                                <group colspan="4">
+    								<field name="cv_adjunto" colspan="4" />
+                                    <separator string="Lista de compromisos" colspan="4"/>
+    								<field name="lista_chk1" />
+	    							<field name="lista_chk2" />
+	    							<field name="lista_chk3" />
+	    							<field name="lista_chk4" />
+	    							<field name="lista_chk5" />
+	    							<field name="lista_chk6" />
+                                </group>
+							</group>
+						</page>
+						<page string="Documentos" >
+							<field name="file_ids" nolabel="1" domain="[('partner_id','=',active_id)]" context="{'search_view_ref' : 'formacion.vista_filtro_adjunto_ext', 'partner_id':active_id, 'res_model':'res.partner'}" />
+						</page>
+    					<page string="Entidades" attrs="{'invisible':[('is_entidad','=',True)]}">
+							<field name="entidades_al_ids" nolabel="1"
+                                context="{'is_entidad':1,'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_entidades','search_view_ref' : 'formacion.vista_filtro_entidades'}"
+                                attrs="{'invisible':[('is_alumno','=',False)]}"
+                            />
+							<field name="entidades_do_ids" nolabel="1"
+                                context="{'is_entidad':1,'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_entidades','search_view_ref' : 'formacion.vista_filtro_entidades'}"
+                                attrs="{'invisible':[('is_docente','=',False)]}"
+                            />
+						</page>
+    					<page string="Relación de cursos" >
+                            <field name="cursos_en_ids" nolabel="1" attrs="{'invisible':[('is_entidad','=',False)]}"/>
+                            <field name="cursos_do_ids" nolabel="1" attrs="{'invisible':[('is_docente','=',False)]}"/>
+                            <field name="cursos_al_ids" nolabel="1" attrs="{'invisible':[('is_alumno','=',False)]}"/>
+                        </page>
+<!--
+    					<page string="Relación de alumnos" attrs="{'invisible':[('is_entidad','=',False)]}">
+							<field name="alumnos_ids" nolabel="1"
+                                context="{'is_alumno':1, 'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_alumnos','search_view_ref' : 'formacion.vista_filtro_alumnos'}"/>
+						</page> 
+-->
+                        <page string="History" groups="base.group_extended" invisible="True">
+                        </page>
+                        <page string="Tags">
+                            <field colspan="4" name="tags" nolabel="1"/>
+                        </page>                        
+                        <page string="Observaciones">
+                            <field colspan="4" name="comment" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+	<!--**********************************************************************************************************************************
+		Acciones
+	***********************************************************************************************************************************-->
+		<record model="ir.actions.act_window" id="accion_formulario_entidades">
+			<field name="name">Entidades</field>
+            <field name="type">ir.actions.act_window</field>
+            <field eval="17" name="priority"/>
+    		<field name="res_model">res.partner</field>
+    		<field name="view_type">form</field>
+			<field name="view_id" ref="vista_arbol_entidades"/>
+			<field name="filter" eval="True"/>
+            <field name="search_view_id" ref="vista_filtro_entidades"/>
+            <field name="domain">[('is_entidad','=',1)]</field>
+            <field name="context">{'is_entidad':1}</field>
+		</record>
+		<record model="ir.actions.act_window" id="accion_formulario_docentes">
+			<field name="name">Docentes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field eval="17" name="priority"/>
+    		<field name="res_model">res.partner</field>
+    		<field name="view_type">form</field>
+			<field name="view_id" ref="vista_arbol_docentes"/>
+			<field name="filter" eval="True"/>
+            <field name="search_view_id" ref="vista_filtro_docentes"/>
+            <field name="domain">[('is_docente','=',1)]</field>
+            <field name="context">{'is_docente':1}</field>
+		</record>
+		<record model="ir.actions.act_window" id="accion_formulario_alumnos">
+			<field name="name">Alumnos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field eval="17" name="priority"/>
+    		<field name="res_model">res.partner</field>
+    		<field name="view_type">form</field>
+			<field name="view_id" ref="vista_arbol_alumnos"/>
+			<field name="filter" eval="True"/>
+            <field name="search_view_id" ref="vista_filtro_alumnos"/>
+            <field name="domain">[('is_alumno','=',1)]</field>
+            <field name="context">{'is_alumno':1}</field>
+		</record>
+		<!--
+			entidades
+		-->
+        <record id="accion_vista_arbol_entidades" model="ir.actions.act_window.view">
+            <field eval="17" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="vista_arbol_entidades"/>
+            <field name="act_window_id" ref="accion_formulario_entidades"/>
+        </record>
+        <record id="accion_vista_formulario_gral" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="vista_formulario_gral"/>
+            <field name="act_window_id" ref="accion_formulario_entidades"/>
+        </record>
+		<!--
+			docentes
+		-->
+        <record id="accion_vista_arbol_docentes" model="ir.actions.act_window.view">
+            <field eval="17" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="vista_arbol_docentes"/>
+            <field name="act_window_id" ref="accion_formulario_docentes"/>
+        </record>
+        <record id="accion_vista_formulario_docentes" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="vista_formulario_gral"/>
+            <field name="act_window_id" ref="accion_formulario_docentes"/>
+        </record>
+
+		<!--
+			alumnos
+		-->
+        <record id="accion_vista_arbol_alumnos" model="ir.actions.act_window.view">
+            <field eval="17" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="vista_arbol_alumnos"/>
+            <field name="act_window_id" ref="accion_formulario_alumnos"/>
+        </record>
+        <record id="accion_vista_formulario_alumnos" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="vista_formulario_gral"/>
+            <field name="act_window_id" ref="accion_formulario_alumnos"/>
+        </record>
+
+	</data>
+</openerp>

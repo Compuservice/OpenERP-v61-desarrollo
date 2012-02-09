@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+	
+	<!-- ###############  			DECLARACIÓN DE MENÚS - APP FORMACION        ############################ -->
+
+	<menuitem id="aplicacion_formacion" name="Formación"  web_icon="images/formacion.jpg" web_icon_hover="images/formacion_over.jpg"/>
+
+	<!-- ###############  			DECLARACIÓN DE SUBMENÚS         ############################ -->
+
+	<menuitem id="submenu_cursos" name="Cursos"  parent="aplicacion_formacion" sequence="1"/>
+
+	<menuitem id="menu_cursos" name="Cursos"  parent="submenu_cursos" action="action_formacion_cursos" sequence="1"/>
+	<menuitem id="menu_entidades" name="Entidades" action="accion_formulario_entidades" icon="terp-personal" parent="submenu_cursos" />
+	<menuitem id="menu_docentes" name="Docentes" action="accion_formulario_docentes" icon="terp-partner" parent="submenu_cursos" />
+	<menuitem id="menu_alumnos" name="Alumnos" action="accion_formulario_alumnos" icon="terp-partner" parent="submenu_cursos" />
+
+	<menuitem id="submenu_configuracion" name="Configuración"  parent="aplicacion_formacion" sequence="5"/>
+	
+	<menuitem id="submenu_configuracion_cursos" name="Cursos"  parent="submenu_configuracion" action="action_formacion_configuracion_cursos" sequence="1"/>
+	
+
+
+	
+	
+	
+	
+
+	</data>
+</openerp>

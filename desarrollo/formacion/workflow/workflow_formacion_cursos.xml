@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+	<data noupdate="0">
+
+
+	<!-- Definimos el workflow de los cursos -->
+	<record model="workflow" id="wkf_formacion_cursos">
+		<field name="name">formacion_cursos.wkf</field>
+		<field name="osv">formacion.cursos</field>
+		<field name="on_create">True</field>
+	</record>
+
+
+	<!-- ACTIVITY: AHORA LOS ESTADOS POSIBLES DEL WORKFLOW con los METODOS A EJECUTAR  -->
+
+	<!-- Requiere tener definidas las funciones en la clase correspondiente -->
+	<record model="workflow.activity" id="cursos_act_draft">
+		<field name="wkf_id" ref="wkf_formacion_cursos" />
+		<!-- flow_start sólo para el estado inicial -->
+		<field name="flow_start">True</field>
+		<field name="name">draft</field>
+		<field name="kind">function</field>
+		<field name="action">formacion_cursos_draft()</field>
+	</record>
+
+	<record model="workflow.activity" id="cursos_act_open">
+		<field name="wkf_id" ref="wkf_formacion_cursos" />
+		<field name="name">open</field>
+		<field name="kind">function</field>
+		<field name="action">formacion_cursos_open()</field>
+	</record>
+
+	<record model="workflow.activity" id="cursos_act_impartiendo">
+		<field name="wkf_id" ref="wkf_formacion_cursos" />
+		<field name="name">impartiendo</field>
+		<field name="kind">function</field>
+		<field name="action">formacion_cursos_impartiendo()</field>
+	</record>
+
+	<record model="workflow.activity" id="cursos_act_cerrando">
+		<field name="wkf_id" ref="wkf_formacion_cursos" />
+		<field name="name">cerrando</field>
+		<field name="kind">function</field>
+		<field name="action">formacion_cursos_cerrando()</field>
+	</record>
+
+	<record model="workflow.activity" id="cursos_act_close">
+		<field name="wkf_id" ref="wkf_formacion_cursos" />
+		<field name="name">close</field>
+		<field name="kind">function</field>
+		<field name="action">formacion_cursos_close()</field>
+		<field name="flow_stop">True</field>
+	</record>
+
+	<record model="workflow.activity" id="cursos_act_cancelado">
+		<field name="wkf_id" ref="wkf_formacion_cursos" />
+		<field name="name">cancelado</field>
+		<field name="kind">function</field>
+		<field name="action">formacion_cursos_cancelar()</field>
+		<field name="flow_stop">True</field>
+	</record>
+
+
+
+	<!-- TRANSITION: POR ÚLTIMO LAS TRANSICIONES ENTRE NODOS DEL WORFLOW -->
+        <!-- Requiere tener definidas las funciones en la clase correspondiente -->
+
+	<record model="workflow.transition" id="cursos_t1">
+		<field name="act_from" ref="cursos_act_draft" />
+		<field name="act_to" ref="cursos_act_open" />
+		<field name="signal">formacion_cursos_open</field>
+	</record>
+
+	<record model="workflow.transition" id="cursos_t2">
+		<field name="act_from" ref="cursos_act_open" />
+		<field name="act_to" ref="cursos_act_impartiendo" />
+		<field name="signal">formacion_cursos_impartiendo</field>
+	</record>
+
+	<record model="workflow.transition" id="cursos_t3">
+		<field name="act_from" ref="cursos_act_impartiendo" />
+		<field name="act_to" ref="cursos_act_cerrando" />
+		<field name="signal">formacion_cursos_cerrando</field>
+	</record>
+
+	<record model="workflow.transition" id="cursos_t4">
+		<field name="act_from" ref="cursos_act_cerrando" />
+		<field name="act_to" ref="cursos_act_close" />
+		<field name="signal">formacion_cursos_close</field>
+	</record>
+
+
+	</data>
+</openerp>
+
