@@ -42,6 +42,8 @@
         'formacion_contacts.xml',
         'formacion_menus.xml',
         'workflow/workflow_formacion_cursos.xml',
+        'security/formacion_security.xml',
+        'security/ir.model.access.csv',
                    ],
     'demo_xml': [],
     'installable': True,

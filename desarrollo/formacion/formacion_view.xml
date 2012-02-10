@@ -94,7 +94,7 @@
 	<!--  Listado editable configuración de cursos  -->
 	<record model="ir.ui.view" id="formacion_configuracion_cursos_view_tree">
 		<field name="name">formacion.configuracion.cursos.view.tree</field>
-		<field name="model">formacion.configuracion.cursos.nombres</field>
+		<field name="model">formacion.configuracion.cursos</field>
 		<field name="type">tree</field>
 		<field name="arch" type="xml">
 			<tree string="Listado de cursos" editable="top">
@@ -117,7 +117,7 @@
 	
 	<record model="ir.actions.act_window" id="action_formacion_configuracion_cursos">
 		<field name="name">Configure Curso</field>
-		<field name="res_model">formacion.configuracion.cursos.nombres</field>
+		<field name="res_model">formacion.configuracion.cursos</field>
 		<field name="type">ir.actions.act_window</field>
 		<field name="view_id" ref= "formacion_configuracion_cursos_view_tree" />
 		<field name="view_type">form</field>

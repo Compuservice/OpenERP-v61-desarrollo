@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+   		<record model="res.groups" id="group_formacion_manager">
+	        	<field name="name">Formación / Manager</field>
+		</record>
+	
+	   	<record model="res.groups" id="group_formacion_user">
+	        	<field name="name">Formación / User</field>
+	   	</record>
+	</data>
+</openerp>

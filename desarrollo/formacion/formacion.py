@@ -28,12 +28,12 @@ import time
 
 
 
-class formacion_configuracion_cursos_nombres(osv.osv):
-    _name = 'formacion.configuracion.cursos.nombres'
+class formacion_configuracion_cursos(osv.osv):
+    _name = 'formacion.configuracion.cursos'
     _columns = {
                 'name':fields.char('Nombre', size=64, required=True),
                 }
-formacion_configuracion_cursos_nombres()
+formacion_configuracion_cursos()
 
 
 class formacion_cursos(osv.osv):
@@ -46,7 +46,7 @@ class formacion_cursos(osv.osv):
     
     _name = 'formacion.cursos'
     _columns = {
-                'name':fields.many2one('formacion.configuracion.cursos.nombres', 'Nombre del curso', required=True),
+                'name':fields.many2one('formacion.configuracion.cursos', 'Nombre del curso', required=True),
                 'modalidad': fields.selection(MODALIDADES, 'Modalidad'),
                 'horas': fields.integer('Horas'),
                 'horas_presenciales': fields.integer('Horas Presenciales'),
