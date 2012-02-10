@@ -15,6 +15,7 @@
 	<menuitem id="menu_cursos" name="Cursos"  action="action_formacion_cursos" parent="submenu_cursos"  sequence="2" />
 	<menuitem id="menu_docentes" name="Docentes" action="accion_formulario_docentes" parent="submenu_cursos" sequence="3" />
 	<menuitem id="menu_alumnos" name="Alumnos" action="accion_formulario_alumnos" parent="submenu_cursos" sequence="4" />
+    <menuitem id="menu_proveedores" name="Proveedores" action="base.action_partner_supplier_form" parent="submenu_cursos" sequence="5" />
 
 	<menuitem id="submenu_configuracion" name="Configuración"  parent="aplicacion_formacion" sequence="5"/>
 	

@@ -46,15 +46,15 @@ class formacion_partner(osv.osv):
         'foto': fields.binary('Foto'), # Docentes y ¿alumnos?
         
         # Datos compartidos por alumnos y entidades
-        'forma_pago' : fields.many2one('payment.type', 'Forma de pago'),
-        'comprobante_pago' : fields.boolean('Comprobante de pago'),
+        'forma_pago' : fields.many2one('payment.type', 'Forma de pago'), #También usado en proveedores
+        'comprobante_pago' : fields.boolean('Comprobante de pago'), #También usado en proveedores
         
         # Datos compartidos por entidades y docentes
         'tags' : fields.text('Tags'),
 
         # Datos específicos de entidades
         'ftfe' : fields.boolean('FTFE', help='Fundación Tripartita para la Formación en el Empleo'),
-        #TODO 'factura' : fields.('¿Que es?')
+        #TODO 'factura' : fields.('¿Que es?') #También usado en proveedores
 
         # Datos específicos de alumnos
         'fecha_nacimiento' : fields.date('Fecha de nacimiento',),
@@ -80,6 +80,10 @@ class formacion_partner(osv.osv):
         # Para visualizar en la vista de árbol
         'movil': fields.related('address', 'mobile', type='char', string='Móvil'),
         'cpostal': fields.related('address', 'zip', type='char', string='Código Postal'),
+
+        # Proveedores **supplier
+        'tipo_proveedor': fields.selection([(1,'Aulas de formación'),(2,'Alojamiento'),(3,'Fungibles'),(4,'Equipamiento'),(5,'Material didactico'),(99,'Otro')],'Tipo'),
+        
 
         #######################################################################################################
         # *Documentos*
