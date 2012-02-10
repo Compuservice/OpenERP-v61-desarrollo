@@ -3,6 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2007-Today  All Rights Reserved.
+#                       
 
 #    $Id$
 #
@@ -21,30 +22,5 @@
 #
 ##############################################################################
 
-{
-    "name": "Formacion",
-    "version": "0.1",
-    "category" : "Generic Modules/Formación",
-    'depends': ['base', 'document', 'l10n_es_toponyms', 'l10n_es_toponyms_region', 'account_payment_extension'],
-    "author": "www.compuservice.es",
-    "category": "Training",
-    "description":
-    """
-        Módulo para la gestión de un centro de formación, que incorpora las siguientes características:
-            * Extiende la clase res.partner añadiendo los campos necesarios para gestionar entidades, cursos, docentes y alumnos.
-            * Crea el objeto cursos
-        
-    """,
-    "init_xml": [],
-    'update_xml': [
-        'formacion_view.xml',
-		'formacion_partner.xml',
-        'formacion_contacts.xml',
-        'formacion_menus.xml',
-        'workflow/workflow_formacion_cursos.xml',
-                   ],
-    'demo_xml': [],
-    'installable': True,
-    'active': False,
-#    'certificate': 'certificate',
-}
+
+import formacion

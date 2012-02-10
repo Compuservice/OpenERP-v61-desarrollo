@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+        <record id="view_contact_filter" model="ir.ui.view">
+            <field name="name">contact.filter</field>
+            <field name="model">res.partner.address</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Buscar contacto">
+                    <group>
+                        <field name="name" />
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Agrupar por...">
+                       <filter string="Pais" icon="terp-go-home" domain="[]" context="{'group_by' : 'country_id'}" />
+                   </group>
+                 </search>
+            </field>
+        </record>
+
+        <record id="view_contact_tree" model="ir.ui.view">
+            <field name="name">contact.tree</field>
+            <field name="model">res.partner.address</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Contactos">
+                    <field name="name" />
+                    <field name="apodo"/>
+                    <field name="phone"/>
+                    <field name="mobile"/>
+                    <field name="email"/>
+                    <field name="zip"/>
+                    <field name="city"/>
+                    <field name="country_id"/>
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_contact_tree" model="ir.actions.act_window">
+            <field name="name">Contactos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.address</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_contact_tree"/>
+        </record>
+
+        <record id="view_contact_form1" model="ir.ui.view">
+            <field name="name">res.contact.form1</field>
+            <field name="model">res.partner.address</field>
+            <field name="type">form</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <form string="Contactos">
+                    <group colspan="4" col="8">
+                        <field name="is_contacto" invisible="1" />
+                        <field name="partner_id" colspan="2" invisible="True" />
+                        <field name="active" invisible="1" />
+                        <field name="company_id" groups="base.group_multi_company" widget="selection" colspan="2" />
+                        <newline/>
+                        <field name="name" invisible="1" />
+                        <field name="nombre" on_change="onchange_nomyapel(nombre, apellidos)" />
+                        <field name="apellidos" on_change="onchange_nomyapel(nombre, apellidos)" />
+                        <field name="apodo" />
+                        <field name="fecha_contacto" />
+                    </group>
+                    <group colspan="4">
+                        <separator string="Motivo" colspan="2" />
+                        <separator string="Tags" colspan="2" />
+                        <newline />
+                        <field name="motivo" colspan="2" nolabel="1" />
+                        <field name="tags" colspan="2" nolabel="1" />
+                    </group>
+                      <group colspan="2" col="2">
+                        <separator string="Dirección postal" colspan="4" col="4"/>
+                        <field name="type"/>
+                        <field name="street" />
+                        <field name="street2" />
+                        <field name="zip"/>
+                        <field name="city"/>
+                        <field name="country_id"/>
+                        <field name="region"/>
+                        <field name="state_id"/>
+                      </group>
+                      <group colspan="2" col="2">
+                        <separator string="Comunicación" colspan="4" col="4"/>
+                        <field name="phone"/>
+                        <field name="mobile"/>
+                        <field name="email" widget="email"/>
+                     </group>
+                </form>
+            </field>
+        </record>
+        <record id="action_contact_form" model="ir.actions.act_window">
+            <field name="name">Direcciones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.address</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('is_contacto','=',1)]</field>
+            <field name="context">{'is_contacto':1}</field>
+            <field name="search_view_id" ref="view_contact_filter"/>
+        </record>
+        <record id="action_contact_form_view1" model="ir.actions.act_window.view">
+            <field eval="10" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_contact_tree"/>
+            <field name="act_window_id" ref="action_contact_form"/>
+        </record>
+        <record id="action_contact_form_view2" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_contact_form1"/>
+            <field name="act_window_id" ref="action_contact_form"/>
+        </record>
+
+	</data>
+</openerp>

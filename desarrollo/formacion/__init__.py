@@ -25,3 +25,4 @@
 
 import formacion
 import formacion_partner
+import formacion_contacts
