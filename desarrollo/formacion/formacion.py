@@ -83,6 +83,7 @@ class formacion_cursos(osv.osv):
             Cerrando: con el curso terminado y gestionando el cierre total.\n \
             Cerrado: para el curso impartido y con la documentación completada'
             ),
+        	'file_ids': fields.one2many('ir.attachment','res_id', 'Documentos'),
                 
                 }
     _defaults = {

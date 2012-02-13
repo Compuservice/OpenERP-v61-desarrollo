@@ -70,6 +70,9 @@
 							<field name="alumnos_ids" nolabel="1"
                                 context="{'is_alumno':1, 'form_view_ref' : 'formacion.vista_formulario_gral', 'tree_view_ref' : 'formacion.vista_arbol_alumnos','search_view_ref' : 'formacion.vista_filtro_alumnos'}"/>
 					</page> 
+					<page string="Documentos" >
+							<field name="file_ids" nolabel="1" domain="[('partner_id','=',active_id)]" context="{'search_view_ref' : 'formacion.vista_filtro_adjunto_ext', 'partner_id':active_id, 'res_model':'res.partner'}" />
+						</page>
 
 					<page string="Tags">
                             <field colspan="4" name="tags" nolabel="1"/>
