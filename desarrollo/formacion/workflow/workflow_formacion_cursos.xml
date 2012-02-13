@@ -33,21 +33,21 @@
 
 	<record model="workflow.activity" id="cursos_act_impartiendo">
 		<field name="wkf_id" ref="wkf_formacion_cursos" />
-		<field name="name">impartiendo</field>
+		<field name="name">cursing</field>
 		<field name="kind">function</field>
 		<field name="action">formacion_cursos_impartiendo()</field>
 	</record>
 
 	<record model="workflow.activity" id="cursos_act_cerrando">
 		<field name="wkf_id" ref="wkf_formacion_cursos" />
-		<field name="name">cerrando</field>
+		<field name="name">closing</field>
 		<field name="kind">function</field>
 		<field name="action">formacion_cursos_cerrando()</field>
 	</record>
 
 	<record model="workflow.activity" id="cursos_act_close">
 		<field name="wkf_id" ref="wkf_formacion_cursos" />
-		<field name="name">close</field>
+		<field name="name">closed</field>
 		<field name="kind">function</field>
 		<field name="action">formacion_cursos_close()</field>
 		<field name="flow_stop">True</field>
@@ -55,7 +55,7 @@
 
 	<record model="workflow.activity" id="cursos_act_cancelado">
 		<field name="wkf_id" ref="wkf_formacion_cursos" />
-		<field name="name">cancelado</field>
+		<field name="name">cancel</field>
 		<field name="kind">function</field>
 		<field name="action">formacion_cursos_cancelar()</field>
 		<field name="flow_stop">True</field>

@@ -10,7 +10,8 @@
 		<field name="model">formacion.cursos</field>
 		<field name="type">tree</field>
 		<field name="arch" type="xml">
-			<tree string="Listado de cursos">
+			<tree string="Listado de cursos" ><!--colors="blue:state in ('draft');green:state in ('open');black:state in ('impartiendo');darkgray:state in ('cerrando');gray:state in ('close');darkred:state in ('cancelado');">
+-->
          		<field name="name" select="1" />
          		<field name="modalidad" select="1" />
          		<field name="horas" select="1" />
@@ -18,6 +19,7 @@
          		<field name="fecha_fin" select="1" />
          		<field name="centro_id" select="1" />
          		<field name="direccion_id" select="1" />
+                <field name="state" />
 			</tree>
 		</field>
 	</record>
@@ -53,11 +55,11 @@
 			         		<field name="direccion_id" context="{'partner_id':centro_id}" domain="[('partner_id','=',centro_id)]"/>
 	         			</group>	
 	         			<group colspan="4" col="6">	         				         				         			
-	         				<field name="state" colspan="2"/>
-							<button name="formacion_cursos_open" string="Abierto" states="draft" icon="gtk-go-forward"/>
-			             	<button name="formacion_cursos_close" string="Cerrado" states="cerrando" icon="gtk-jump-to"/>
-							<button name="formacion_cursos_cerrando" string="Cerrando" states="impartiendo" icon="gtk-jump-to"/>
-				            <button name="formacion_cursos_impartiendo" string="Impartiendo" states="open"  icon="gtk-go-forward"/>
+	         				<field name="state" widget="statusbar" statusbar_visible="draft,open,cursing,closing,closed" statusbar_colors="{&quot;proforma&quot;:&quot;blue&quot;,&quot;proforma2&quot;:&quot;blue&quot;}"/>
+							<button name="formacion_cursos_open" string="Autorizado" states="draft" icon="gtk-go-forward"/>
+				            <button name="formacion_cursos_impartiendo" string="En curso" states="open"  icon="gtk-go-forward"/>
+			             	<button name="formacion_cursos_close" string="Cerrado" states="closing" icon="gtk-jump-to"/>
+							<button name="formacion_cursos_cerrando" string="Cerrando" states="cursing" icon="gtk-jump-to"/>
 	         			</group>
 		         		         						
 		         		         			

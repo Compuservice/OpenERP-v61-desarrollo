@@ -72,16 +72,16 @@ class formacion_cursos(osv.osv):
                 'notas': fields.text('Observaciones'),
                 'state': fields.selection([
                     ('draft', 'Borrador'),
-                    ('open', 'Abierto'),
-                    ('impartiendo', 'Impartiendo'),
-                    ('cerrando', 'Cerrando'),
-                    ('close', 'Cerrado'),
-                    ('cancelado', 'Cancelado')], 'Estado', readonly=True,
-            help='Borrador: Recien creado.\n \
-            Abierto: una vez autorizado el curso.\n \
-            Impartiendo: para los cursos que se están impartiendo.\n \
-            Cerrando: con el curso terminado y gestionando el cierre total.\n \
-            Cerrado: para el curso impartido y con la documentación completada'
+                    ('open', 'Autorizado'),
+                    ('cursing', 'Cursando'),
+                    ('closing', 'Cerrando'),
+                    ('closed', 'Cerrado'),
+                    ('cancel', 'Cancelado')], 'Estado', readonly=True,
+            help='*Borrador: Recien creado. \
+            \n*Autorizado: una vez autorizado el curso. \
+            \n*Cursando: para los cursos que se están impartiendo. \
+            \n*Cerrando: con el curso terminado y gestionando el cierre total. \
+            \n*Cerrado: para el curso impartido y con la documentación completada'
             ),
         	'file_ids': fields.one2many('ir.attachment','res_id', 'Documentos'),
                 
@@ -102,23 +102,20 @@ class formacion_cursos(osv.osv):
         return True
 
     def formacion_cursos_impartiendo(self, cr, uid, ids):
-        self.write(cr, uid, ids, { 'state': 'impartiendo' ,'log_fecha_impartiendo': time.strftime('%Y-%m-%d %H:%M:%S')})
+        self.write(cr, uid, ids, { 'state': 'cursing' ,'log_fecha_impartiendo': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
     
     def formacion_cursos_cerrando(self, cr, uid, ids):
-        self.write(cr, uid, ids, { 'state': 'cerrando' ,'log_fecha_cerrando': time.strftime('%Y-%m-%d %H:%M:%S')})
+        self.write(cr, uid, ids, { 'state': 'closing' ,'log_fecha_cerrando': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
 
     def formacion_cursos_close(self, cr, uid, ids):
-        self.write(cr, uid, ids, { 'state': 'close' ,'log_fecha_cerrado': time.strftime('%Y-%m-%d %H:%M:%S')})
+        self.write(cr, uid, ids, { 'state': 'closed' ,'log_fecha_cerrado': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
 
     def formacion_cursos_cancelar(self, cr, uid, ids):
-        self.write(cr, uid, ids, { 'state': 'close' ,'log_fecha_cancelado': time.strftime('%Y-%m-%d %H:%M:%S')})
+        self.write(cr, uid, ids, { 'state': 'cancel' ,'log_fecha_cancelado': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
 
-
-   
-        
 formacion_cursos()
     
