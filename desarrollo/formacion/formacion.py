@@ -73,7 +73,7 @@ class formacion_cursos(osv.osv):
                 'state': fields.selection([
                     ('draft', 'Borrador'),
                     ('open', 'Autorizado'),
-                    ('cursing', 'Cursando'),
+                    ('studying', 'Cursando'),
                     ('closing', 'Cerrando'),
                     ('closed', 'Cerrado'),
                     ('cancel', 'Cancelado')], 'Estado', readonly=True,
@@ -102,7 +102,7 @@ class formacion_cursos(osv.osv):
         return True
 
     def formacion_cursos_impartiendo(self, cr, uid, ids):
-        self.write(cr, uid, ids, { 'state': 'cursing' ,'log_fecha_impartiendo': time.strftime('%Y-%m-%d %H:%M:%S')})
+        self.write(cr, uid, ids, { 'state': 'studying' ,'log_fecha_impartiendo': time.strftime('%Y-%m-%d %H:%M:%S')})
         return True
     
     def formacion_cursos_cerrando(self, cr, uid, ids):

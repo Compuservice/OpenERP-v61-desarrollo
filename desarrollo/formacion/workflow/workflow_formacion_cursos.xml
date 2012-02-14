@@ -33,7 +33,7 @@
 
 	<record model="workflow.activity" id="cursos_act_impartiendo">
 		<field name="wkf_id" ref="wkf_formacion_cursos" />
-		<field name="name">cursing</field>
+		<field name="name">studying</field>
 		<field name="kind">function</field>
 		<field name="action">formacion_cursos_impartiendo()</field>
 	</record>
